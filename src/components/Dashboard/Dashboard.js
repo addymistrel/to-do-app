@@ -5,11 +5,13 @@ import {
   DropdownItem,
   DropdownTrigger,
   Dropdown,
+  Pagination,
   DropdownMenu,
   Avatar,
   Button,
   Image,
   Divider,
+  Calendar,
 } from "@nextui-org/react";
 import "./Dashboard.css";
 import { MdDashboard } from "react-icons/md";
@@ -19,6 +21,8 @@ import { SearchIcon } from "./SearchIcon";
 import { FaPowerOff } from "react-icons/fa6";
 import { SlClose } from "react-icons/sl";
 import useWindowWidth from "../../Hooks/useWindowWidth/useWindowWidth";
+import Home from "../Home/Home";
+import AllToDos from "../AllToDos/AllToDos";
 
 function Dashboard() {
   const width = useWindowWidth();
@@ -110,7 +114,7 @@ function Dashboard() {
               src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
             />
             <Divider className="h-7 bg-[grey]" orientation="vertical" />
-            <div className="flex justify-end items-center">
+            <div className="flex justify-end items-center hover:cursor-pointer">
               <FaPowerOff
                 style={{
                   fontSize: "180%",
@@ -179,7 +183,8 @@ function Dashboard() {
             </Dropdown>
           </div>
         </div>
-        <div className="main-work"></div>
+        {/* <Home /> */}
+        <AllToDos />
       </div>
     </div>
   );
