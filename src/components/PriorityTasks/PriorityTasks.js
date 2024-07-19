@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import {
-  Tabs,
-  Tab,
   Card,
   CardHeader,
   CardBody,
@@ -9,47 +7,14 @@ import {
   Avatar,
   Button,
 } from "@nextui-org/react";
-import { IoMdTime } from "react-icons/io";
-import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
 import "../Dashboard/Dashboard.css";
 
-export default function AllToDos() {
+export default function PriorityTasks() {
   const arr = [1, 2, 3, 4, 4, 4, 4, 4, 4, 4, 4];
   const [isFollowed, setIsFollowed] = useState(false);
   return (
     <div className="flex flex-col">
-      <div className="flex w-full justify-center items-center pt-6">
-        <Tabs
-          aria-label="Options"
-          color="prim"
-          classNames={{
-            tabList: "bg-[#333]",
-          }}
-          variant="bordered"
-        >
-          <Tab
-            key="done"
-            title={
-              <div className="flex items-center space-x-2">
-                <IoCheckmarkDoneCircleSharp
-                  style={{ fontSize: "x-large", color: "#006fee" }}
-                />
-                <span>Completed</span>
-              </div>
-            }
-          />
-          <Tab
-            key="pending"
-            title={
-              <div className="flex items-center space-x-2">
-                <IoMdTime style={{ fontSize: "x-large", color: "#EF0031" }} />
-                <span>Pending</span>
-              </div>
-            }
-          />
-        </Tabs>
-      </div>
-      <div className="envelope-div">
+      <div className="envelope-div" style={{ height: "90vh" }}>
         <div className="items-div">
           {arr.map((item) => {
             return (
