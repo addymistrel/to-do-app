@@ -23,14 +23,21 @@ import { SlClose } from "react-icons/sl";
 import useWindowWidth from "../../Hooks/useWindowWidth/useWindowWidth";
 import Home from "../Home/Home";
 import AllToDos from "../AllToDos/AllToDos";
+import PriorityTasks from "../PriorityTasks/PriorityTasks";
+import { useSnackbar } from "notistack";
+import { useDispatch, useSelector } from "react-redux";
 
 function Dashboard() {
+  const userData = useSelector((state) => JSON.parse(state.user.user));
+  const dispatch = useDispatch();
   const width = useWindowWidth();
+  const [option, setOption] = useState(1);
   const [isSidebarOpen, setSidebarOpen] = useState(true);
 
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
   };
+
   useEffect(() => {
     if (width <= 768) setSidebarOpen(false);
     else setSidebarOpen(true);
@@ -67,10 +74,10 @@ function Dashboard() {
               fontWeight: "500",
             }}
             className="flex justify-center items-center"
+            onPress={() => setOption(1)}
           >
             Dashboard
           </Button>
-
           <Button
             fullWidth
             color="primary"
@@ -81,10 +88,10 @@ function Dashboard() {
               fontWeight: "500",
             }}
             className="flex justify-center items-center"
+            onPress={() => setOption(2)}
           >
             All To-Dos
           </Button>
-
           <Button
             fullWidth
             color="primary"
@@ -97,6 +104,7 @@ function Dashboard() {
               fontWeight: "500",
             }}
             className="flex justify-center items-center"
+            onPress={() => setOption(3)}
           >
             Priority Tasks
           </Button>
@@ -166,25 +174,32 @@ function Dashboard() {
               <DropdownMenu aria-label="Profile Actions" variant="flat">
                 <DropdownItem key="profile" className="h-14 gap-2">
                   <p className="font-semibold">Signed in as</p>
-                  <p className="font-semibold">zoey@example.com</p>
+                  <p className="font-semibold">{userData.email}</p>
                 </DropdownItem>
-                <DropdownItem key="settings">My Settings</DropdownItem>
-                <DropdownItem key="team_settings">Team Settings</DropdownItem>
-                <DropdownItem key="analytics">Analytics</DropdownItem>
-                <DropdownItem key="system">System</DropdownItem>
-                <DropdownItem key="configurations">Configurations</DropdownItem>
-                <DropdownItem key="help_and_feedback">
-                  Help & Feedback
+                <DropdownItem
+                  key="help_and_feedback"
+                  className="bg-[#333] text-white cursor-default"
+                >
+                  {userData.name}
                 </DropdownItem>
-                <DropdownItem key="logout" color="danger">
+                <DropdownItem
+                  key="logout"
+                  className="bg-danger text-white"
+                  onClick={() => dispatch({ type: "LOGOUT" })}
+                >
                   Log Out
                 </DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </div>
         </div>
-        {/* <Home /> */}
-        <AllToDos />
+        {option === 1 ? (
+          <Home />
+        ) : option == 2 ? (
+          <AllToDos />
+        ) : (
+          <PriorityTasks />
+        )}
       </div>
     </div>
   );

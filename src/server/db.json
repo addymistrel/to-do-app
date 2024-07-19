@@ -1,0 +1,222 @@
+{
+  "data": [
+    {
+      "email": "abc@example.com",
+      "password": "password",
+      "name": "John Holland",
+      "todos": [
+        {
+          "date": "12-12-2012",
+          "description": "My first Todo",
+          "status": "completed",
+          "isPrioritized": false
+        }
+      ],
+      "id": 1
+    },
+    {
+      "email": "alice@example.com",
+      "password": "securepass",
+      "name": "Alice Smith",
+      "todos": [
+        {
+          "date": "15-05-2023",
+          "description": "Complete project report",
+          "status": "pending",
+          "isPrioritized": true
+        },
+        {
+          "date": "18-05-2023",
+          "description": "Send email to team about meeting",
+          "status": "pending",
+          "isPrioritized": false
+        },
+        {
+          "date": "20-05-2023",
+          "description": "Buy groceries",
+          "status": "completed",
+          "isPrioritized": false
+        },
+        {
+          "date": "22-05-2023",
+          "description": "Call mom",
+          "status": "pending",
+          "isPrioritized": true
+        },
+        {
+          "date": "25-05-2023",
+          "description": "Prepare presentation slides",
+          "status": "pending",
+          "isPrioritized": false
+        },
+        {
+          "date": "28-05-2023",
+          "description": "Pay electricity bill",
+          "status": "completed",
+          "isPrioritized": true
+        },
+        {
+          "date": "30-05-2023",
+          "description": "Read new book",
+          "status": "pending",
+          "isPrioritized": false
+        },
+        {
+          "date": "02-06-2023",
+          "description": "Practice guitar",
+          "status": "pending",
+          "isPrioritized": false
+        },
+        {
+          "date": "05-06-2023",
+          "description": "Plan weekend trip",
+          "status": "pending",
+          "isPrioritized": false
+        },
+        {
+          "date": "08-06-2023",
+          "description": "Attend webinar on AI",
+          "status": "pending",
+          "isPrioritized": true
+        }
+      ],
+      "id": 2
+    },
+    {
+      "email": "bob@example.com",
+      "password": "bobspassword",
+      "name": "Bob Johnson",
+      "todos": [
+        {
+          "date": "10-07-2023",
+          "description": "Update resume",
+          "status": "pending",
+          "isPrioritized": true
+        },
+        {
+          "date": "12-07-2023",
+          "description": "Schedule dentist appointment",
+          "status": "pending",
+          "isPrioritized": false
+        },
+        {
+          "date": "15-07-2023",
+          "description": "Review project proposal",
+          "status": "completed",
+          "isPrioritized": false
+        },
+        {
+          "date": "18-07-2023",
+          "description": "Go for a run",
+          "status": "pending",
+          "isPrioritized": true
+        },
+        {
+          "date": "20-07-2023",
+          "description": "Meet with client",
+          "status": "pending",
+          "isPrioritized": false
+        },
+        {
+          "date": "22-07-2023",
+          "description": "Write article for blog",
+          "status": "pending",
+          "isPrioritized": false
+        },
+        {
+          "date": "25-07-2023",
+          "description": "Cook dinner",
+          "status": "completed",
+          "isPrioritized": true
+        },
+        {
+          "date": "28-07-2023",
+          "description": "Practice meditation",
+          "status": "pending",
+          "isPrioritized": false
+        },
+        {
+          "date": "30-07-2023",
+          "description": "Plan next vacation",
+          "status": "pending",
+          "isPrioritized": false
+        },
+        {
+          "date": "02-08-2023",
+          "description": "Attend conference",
+          "status": "pending",
+          "isPrioritized": true
+        }
+      ],
+      "id": 3
+    },
+    {
+      "email": "emma@example.com",
+      "password": "emmapass123",
+      "name": "Emma Davis",
+      "todos": [
+        {
+          "date": "05-09-2023",
+          "description": "Buy birthday gift for friend",
+          "status": "pending",
+          "isPrioritized": true
+        },
+        {
+          "date": "08-09-2023",
+          "description": "Renew gym membership",
+          "status": "pending",
+          "isPrioritized": false
+        },
+        {
+          "date": "10-09-2023",
+          "description": "Submit project report",
+          "status": "completed",
+          "isPrioritized": false
+        },
+        {
+          "date": "12-09-2023",
+          "description": "Call insurance company",
+          "status": "pending",
+          "isPrioritized": true
+        },
+        {
+          "date": "15-09-2023",
+          "description": "Prepare for job interview",
+          "status": "pending",
+          "isPrioritized": false
+        },
+        {
+          "date": "18-09-2023",
+          "description": "Buy new shoes",
+          "status": "completed",
+          "isPrioritized": true
+        },
+        {
+          "date": "20-09-2023",
+          "description": "Read newspaper",
+          "status": "pending",
+          "isPrioritized": false
+        },
+        {
+          "date": "22-09-2023",
+          "description": "Attend photography class",
+          "status": "pending",
+          "isPrioritized": false
+        },
+        {
+          "date": "25-09-2023",
+          "description": "Update budget spreadsheet",
+          "status": "pending",
+          "isPrioritized": false
+        },
+        {
+          "date": "28-09-2023",
+          "description": "Practice yoga",
+          "status": "pending",
+          "isPrioritized": true
+        }
+      ],
+      "id": 4
+    }
+  ]
+}

@@ -15,7 +15,7 @@ export default function TodoCards() {
   const [isFollowed, setIsFollowed] = React.useState(false);
 
   useEffect(() => {
-    if (width > 1000) setArr([1, 2, 3, 4, 6, 6, 7, 8, 8, 9, 9, 9, 9]);
+    if (width > 1000) setArr([1, 2]);
     else setArr([1]);
   }, [width]);
   return arr.map((item) => {

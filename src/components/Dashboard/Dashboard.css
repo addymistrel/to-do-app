@@ -77,3 +77,18 @@
     z-index: 1;
   }
 }
+
+.envelope-div {
+  display: grid;
+  overflow-y: scroll;
+  height: 80vh;
+  justify-content: center;
+  padding-top: 2%;
+}
+
+.items-div {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-direction: column;
+}
