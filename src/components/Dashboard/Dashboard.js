@@ -101,8 +101,13 @@ function Dashboard() {
   // Format the current date
   const formattedDate = formatDate(currentDate);
 
-  function generateUniqueId() {
-    return Date.now().toString(36) + Math.random().toString(36).substr(2, 9);
+  let counter = 0;
+
+  function getUniqueId() {
+    const now = Date.now(); // Get the current timestamp in milliseconds
+    counter += 1; // Increment the counter to ensure uniqueness within the same second
+
+    return `${now}-${counter}`; // Combine timestamp and counter for unique ID
   }
 
   const blankTaskData = {
@@ -110,7 +115,7 @@ function Dashboard() {
     description: "",
     status: "pending",
     isPrioritized: false,
-    id: generateUniqueId(),
+    id: getUniqueId(),
   };
 
   const [taskData, setTaskData] = useState(blankTaskData);
@@ -126,6 +131,7 @@ function Dashboard() {
   }
 
   const handleAdd = async () => {
+    setTaskData((prev) => ({ ...prev, id: getUniqueId() }));
     if (isBlank(taskData)) {
       showToast("All Fields are mandatory", "warning");
     } else {
@@ -486,7 +492,13 @@ function Dashboard() {
                 <Button color="danger" variant="light" onPress={onClose}>
                   Close
                 </Button>
-                <Button color="primary" onPress={handleAdd}>
+                <Button
+                  color="primary"
+                  onPress={() => {
+                    setTaskData((prev) => ({ ...prev, id: getUniqueId() }));
+                    handleAdd();
+                  }}
+                >
                   Add
                 </Button>
               </ModalFooter>
