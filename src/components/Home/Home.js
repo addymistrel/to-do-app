@@ -104,26 +104,34 @@ function Home({ isSidebarOpen, refresh, setRefresh }) {
             width >= 1228 ? "w-4/5" : "w-full"
           } flex-col gap-4 bg-[#333] pt-6 rounded-xl md:mr-5 lg:mr-5`}
         >
-          <div className="flex justify-around px-3">
-            <TodoCards
-              currentPage={currentPage_pending}
-              pageSize={pageSize_pending}
-              refresh={refresh}
-              setRefresh={setRefresh}
-              todoData={todoData_pending}
-              status={"pending"}
-            />
-          </div>
-          <div className="flex justify-center items-center py-3">
-            <Pagination
-              isCompact
-              showControls
-              total={totalPages_pending}
-              initialPage={currentPage_pending}
-              className="rounded-[10px]"
-              onChange={handlePageChange_pending}
-            />
-          </div>
+          {todoData_pending.length !== 0 ? (
+            <>
+              <div className="flex justify-around px-3">
+                <TodoCards
+                  currentPage={currentPage_pending}
+                  pageSize={pageSize_pending}
+                  refresh={refresh}
+                  setRefresh={setRefresh}
+                  todoData={todoData_pending}
+                  status={"pending"}
+                />
+              </div>
+              <div className="flex justify-center items-center py-3">
+                <Pagination
+                  isCompact
+                  showControls
+                  total={totalPages_pending}
+                  initialPage={currentPage_pending}
+                  className="rounded-[10px]"
+                  onChange={handlePageChange_pending}
+                />
+              </div>
+            </>
+          ) : (
+            <h1 class="bg-clip-text text-transparent text-center pb-4  text-white text-2xl font-black">
+              No Pending Todos to display...
+            </h1>
+          )}
         </div>
         {width > 1228 && (
           <div className="w-1/5">
@@ -139,29 +147,37 @@ function Home({ isSidebarOpen, refresh, setRefresh }) {
       <h1 class="text-3xl font-normal font-semibold leading-normal mt-2 mb-2 text-[#006fee]">
         Completed
       </h1>
-      <div className="flex ">
+      <div className="flex">
         <div
           className="flex w-full
               flex-col gap-4 bg-[#333] pt-6 rounded-xl md:mr-5 lg:mr-5"
         >
-          <div className="flex justify-around">
-            <TodoCards
-              currentPage={currentPage_completed}
-              pageSize={pageSize_completed}
-              todoData={todoData_completed}
-              status={"completed"}
-            />
-          </div>
-          <div className="flex justify-center items-center py-3">
-            <Pagination
-              isCompact
-              showControls
-              total={totalPages_completed}
-              initialPage={currentPage_completed}
-              className="rounded-[10px]"
-              onChange={handlePageChange_completed}
-            />
-          </div>
+          {todoData_completed.length !== 0 ? (
+            <>
+              <div className="flex justify-around">
+                <TodoCards
+                  currentPage={currentPage_completed}
+                  pageSize={pageSize_completed}
+                  todoData={todoData_completed}
+                  status={"completed"}
+                />
+              </div>
+              <div className="flex justify-center items-center py-3">
+                <Pagination
+                  isCompact
+                  showControls
+                  total={totalPages_completed}
+                  initialPage={currentPage_completed}
+                  className="rounded-[10px]"
+                  onChange={handlePageChange_completed}
+                />
+              </div>
+            </>
+          ) : (
+            <h1 class="bg-clip-text text-transparent text-center pb-4 text-white text-2xl font-black">
+              No Completed Todos to display...
+            </h1>
+          )}
         </div>
       </div>
     </div>

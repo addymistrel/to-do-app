@@ -237,104 +237,110 @@ export default function AllToDos({ refresh, setRefresh }) {
             />
           </Tabs>
         </div>
-        <div className="envelope-div">
-          <div className="items-div">
-            {arr.map((item) => {
-              return (
-                <Card className="w-[340px]">
-                  <CardHeader className="justify-between">
-                    <div className="flex gap-5">
-                      <Avatar
-                        isBordered
-                        radius="full"
-                        size="md"
-                        src="https://nextui.org/avatars/avatar-1.png"
-                      />
-                    </div>
-                    <div className="flex flex-col gap-1 items-start justify-center">
-                      <h4 className="text-1xl font-semibold leading-none text-default-600">
-                        {formatDate(item.date)}
-                      </h4>
-                    </div>
-                    {selected === "completed" ? (
+        {arr.length !== 0 ? (
+          <div className="envelope-div">
+            <div className="items-div">
+              {arr.map((item) => {
+                return (
+                  <Card className="w-[340px]">
+                    <CardHeader className="justify-between">
+                      <div className="flex gap-5">
+                        <Avatar
+                          isBordered
+                          radius="full"
+                          size="md"
+                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeeqq5bu1g9ATW_JOPSWo2AbOV2j0OdVFG8A&s"
+                        />
+                      </div>
+                      <div className="flex flex-col gap-1 items-start justify-center">
+                        <h4 className="text-1xl font-semibold leading-none text-default-600">
+                          {formatDate(item.date)}
+                        </h4>
+                      </div>
+                      {selected === "completed" ? (
+                        <Button
+                          color="success"
+                          radius="full"
+                          size="sm"
+                          variant="solid"
+                        >
+                          Completed
+                        </Button>
+                      ) : (
+                        <Button
+                          color="primary"
+                          radius="full"
+                          size="sm"
+                          variant="solid"
+                          onPress={() => {
+                            setAction("done");
+                            item.status = "completed";
+                            handleDone(item);
+                          }}
+                        >
+                          Mark as Done
+                        </Button>
+                      )}
+                    </CardHeader>
+                    <CardBody className="px-3 py-0 text-small text-default-400">
+                      <div className="flex flex-col gap-1 items-start justify-center">
+                        <h4 className="text-small font-semibold leading-none text-default-600">
+                          {item.description}
+                        </h4>
+                      </div>
+                      <span className="pt-2"></span>
+                    </CardBody>
+                    <CardFooter className="flex justify-end gap-3">
+                      {item.isPrioritized === true && (
+                        <Button
+                          color="warning"
+                          radius="full"
+                          size="sm"
+                          variant="solid"
+                          className="text-1.5xl"
+                        >
+                          <MdPriorityHigh />
+                        </Button>
+                      )}
+                      {selected === "pending" && (
+                        <Button
+                          color="secondary"
+                          radius="full"
+                          size="sm"
+                          variant="solid"
+                          onPress={() => {
+                            setAction("edit");
+                            setEditData(item);
+                            onOpen();
+                          }}
+                        >
+                          Edit
+                        </Button>
+                      )}
                       <Button
-                        color="success"
-                        radius="full"
-                        size="sm"
-                        variant="solid"
-                      >
-                        Completed
-                      </Button>
-                    ) : (
-                      <Button
-                        color="primary"
+                        color="danger"
                         radius="full"
                         size="sm"
                         variant="solid"
                         onPress={() => {
-                          setAction("done");
-                          item.status = "completed";
-                          handleDone(item);
-                        }}
-                      >
-                        Mark as Done
-                      </Button>
-                    )}
-                  </CardHeader>
-                  <CardBody className="px-3 py-0 text-small text-default-400">
-                    <div className="flex flex-col gap-1 items-start justify-center">
-                      <h4 className="text-small font-semibold leading-none text-default-600">
-                        {item.description}
-                      </h4>
-                    </div>
-                    <span className="pt-2"></span>
-                  </CardBody>
-                  <CardFooter className="flex justify-end gap-3">
-                    {item.isPrioritized === true && (
-                      <Button
-                        color="warning"
-                        radius="full"
-                        size="sm"
-                        variant="solid"
-                        className="text-1.5xl"
-                      >
-                        <MdPriorityHigh />
-                      </Button>
-                    )}
-                    {selected === "pending" && (
-                      <Button
-                        color="secondary"
-                        radius="full"
-                        size="sm"
-                        variant="solid"
-                        onPress={() => {
-                          setAction("edit");
+                          setAction("delete");
                           setEditData(item);
                           onOpen();
                         }}
                       >
-                        Edit
+                        Delete
                       </Button>
-                    )}
-                    <Button
-                      color="danger"
-                      radius="full"
-                      size="sm"
-                      variant="solid"
-                      onPress={() => {
-                        setAction("delete");
-                        setEditData(item);
-                        onOpen();
-                      }}
-                    >
-                      Delete
-                    </Button>
-                  </CardFooter>
-                </Card>
-              );
-            })}
+                    </CardFooter>
+                  </Card>
+                );
+              })}
+            </div>
           </div>
-        </div>
+        ) : (
+          <h1 class=" text-center  text-3xl font-black pt-[20%]">
+            No Todos to display...
+          </h1>
+        )}
       </div>
       <Modal
         backdrop="opaque"
