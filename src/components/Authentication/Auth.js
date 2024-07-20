@@ -72,7 +72,7 @@ export default function Auth({
       variant: vnt,
       autoHideDuration: 3000,
       anchorOrigin: {
-        vertical: "top",
+        vertical: "bottom",
         horizontal: "right",
       },
     });
@@ -82,6 +82,10 @@ export default function Auth({
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
+
+  function generateUniqueId() {
+    return Date.now().toString(36) + Math.random().toString(36).substr(2, 9);
+  }
 
   const handleSignin = async () => {
     if (isBlank(signinData)) {
@@ -141,9 +145,10 @@ export default function Auth({
                 email: signupData.email,
                 password: signupData.password,
                 todos: [],
+                id: generateUniqueId(),
               };
-              fetch("http://localhost:8080/data", {
-                method: "POST",
+              fetch(`${process.env.BACKEND_URL}/data`, {
+                method: "PUT",
                 headers: {
                   "Content-Type": "application/json",
                 },
