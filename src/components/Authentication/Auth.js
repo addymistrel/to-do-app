@@ -160,7 +160,8 @@ export default function Auth({
                 .then(() => {
                   showToast("Sign Up Successfull!", "success");
                   dispatch({
-                    type: "LOGOUT",
+                    type: "LOGIN_SUCCESS",
+                    payload: JSON.stringify(postData),
                   });
                   navigate("/home");
                 })
