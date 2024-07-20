@@ -90,7 +90,7 @@ export default function Auth({
       if (!validateEmail(signinData.email)) {
         showToast("Invalid Email!", "warning");
       } else {
-        await fetch("http://localhost:8080/data/", {
+        await fetch(`${process.env.REACT_APP_BACKEND_URL}/data/`, {
           method: "GET",
         })
           .then((res) => res.json())
@@ -127,7 +127,7 @@ export default function Auth({
       if (!validateEmail(signupData.email)) {
         showToast("Invalid Email!", "warning");
       } else {
-        fetch("http://localhost:8080/data/", {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/data/`, {
           method: "GET",
         })
           .then((res) => res.json())

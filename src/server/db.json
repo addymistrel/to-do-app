@@ -253,15 +253,7 @@
       "name": "Aditya Kumar Dutta",
       "email": "addymistrel@gmail.com",
       "password": "123456",
-      "todos": [
-        {
-          "date": "20-07-2024",
-          "description": "Morning Walk",
-          "status": "completed",
-          "isPrioritized": false,
-          "id": "lyu6c5wp4mbtbd8x2"
-        }
-      ],
+      "todos": [],
       "id": 5
     }
   ]
