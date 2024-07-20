@@ -8,9 +8,12 @@ import {
   Button,
 } from "@nextui-org/react";
 import "../Dashboard/Dashboard.css";
+import { useSelector } from "react-redux";
 
 export default function PriorityTasks() {
-  const arr = [1, 2, 3, 4, 4, 4, 4, 4, 4, 4, 4];
+  const arr = useSelector((state) => JSON.parse(state.user.user)).todos.filter(
+    (item) => item.isPrioritized === true
+  );
   const [isFollowed, setIsFollowed] = useState(false);
   return (
     <div className="flex flex-col">
@@ -33,34 +36,48 @@ export default function PriorityTasks() {
                       20th September, 2024
                     </h4>
                   </div>
-                  <Button
-                    color="primary"
-                    radius="full"
-                    size="sm"
-                    variant={isFollowed ? "bordered" : "solid"}
-                    onPress={() => setIsFollowed(!isFollowed)}
-                  >
-                    Mark as Done
-                  </Button>
+                  {item.status === "pending" ? (
+                    <Button
+                      color="primary"
+                      radius="full"
+                      size="sm"
+                      variant={isFollowed ? "bordered" : "solid"}
+                      onPress={() => setIsFollowed(!isFollowed)}
+                    >
+                      Mark as Done
+                    </Button>
+                  ) : (
+                    <Button
+                      color="success"
+                      radius="full"
+                      size="sm"
+                      variant={isFollowed ? "bordered" : "solid"}
+                      onPress={() => setIsFollowed(!isFollowed)}
+                    >
+                      Completed
+                    </Button>
+                  )}
                 </CardHeader>
                 <CardBody className="px-3 py-0 text-small text-default-400">
                   <div className="flex flex-col gap-1 items-start justify-center">
                     <h4 className="text-small font-semibold leading-none text-default-600">
-                      Zoey Lang
+                      {item.description}
                     </h4>
                   </div>
                   <span className="pt-2"></span>
                 </CardBody>
                 <CardFooter className="flex justify-end gap-3">
-                  <Button
-                    color="secondary"
-                    radius="full"
-                    size="sm"
-                    variant={isFollowed ? "bordered" : "solid"}
-                    onPress={() => setIsFollowed(!isFollowed)}
-                  >
-                    Edit
-                  </Button>
+                  {item.status === "pending" && (
+                    <Button
+                      color="secondary"
+                      radius="full"
+                      size="sm"
+                      variant={isFollowed ? "bordered" : "solid"}
+                      onPress={() => setIsFollowed(!isFollowed)}
+                    >
+                      Edit
+                    </Button>
+                  )}
                   <Button
                     color="danger"
                     radius="full"

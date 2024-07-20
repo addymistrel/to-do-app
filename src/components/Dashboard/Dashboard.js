@@ -20,6 +20,7 @@ import { MdNotificationImportant } from "react-icons/md";
 import { SearchIcon } from "./SearchIcon";
 import { FaPowerOff } from "react-icons/fa6";
 import { SlClose } from "react-icons/sl";
+import { IoAdd, IoAddSharp } from "react-icons/io5";
 import useWindowWidth from "../../Hooks/useWindowWidth/useWindowWidth";
 import Home from "../Home/Home";
 import AllToDos from "../AllToDos/AllToDos";
@@ -42,6 +43,7 @@ function Dashboard() {
     if (width <= 768) setSidebarOpen(false);
     else setSidebarOpen(true);
   }, [width]);
+
   return (
     <div className="dashboard-main">
       <div
@@ -74,7 +76,10 @@ function Dashboard() {
               fontWeight: "500",
             }}
             className="flex justify-center items-center"
-            onPress={() => setOption(1)}
+            onPress={() => {
+              setOption(1);
+              if (width <= 768) toggleSidebar();
+            }}
           >
             Dashboard
           </Button>
@@ -88,7 +93,10 @@ function Dashboard() {
               fontWeight: "500",
             }}
             className="flex justify-center items-center"
-            onPress={() => setOption(2)}
+            onPress={() => {
+              setOption(2);
+              if (width <= 768) toggleSidebar();
+            }}
           >
             All To-Dos
           </Button>
@@ -104,7 +112,10 @@ function Dashboard() {
               fontWeight: "500",
             }}
             className="flex justify-center items-center"
-            onPress={() => setOption(3)}
+            onPress={() => {
+              setOption(3);
+              if (width <= 768) toggleSidebar();
+            }}
           >
             Priority Tasks
           </Button>
@@ -158,6 +169,17 @@ function Dashboard() {
               startContent={<SearchIcon size={18} />}
             />
           </div>
+          {width > 768 && (
+            <div>
+              <Button
+                color="success"
+                endContent={<IoAddSharp />}
+                className="text-1xl text-white bg-gradient-to-r from-indigo-500 to-teal-500 "
+              >
+                New Todo
+              </Button>
+            </div>
+          )}
           <div className="profile-avatar flex justify-center items-center">
             <Dropdown placement="bottom-end">
               <DropdownTrigger>
@@ -194,11 +216,50 @@ function Dashboard() {
           </div>
         </div>
         {option === 1 ? (
-          <Home />
+          <>
+            {width <= 768 && (
+              <div className="flex justify-center pt-6 pb-2">
+                <Button
+                  color="success"
+                  endContent={<IoAddSharp />}
+                  className="text-1xl text-white bg-gradient-to-r from-indigo-500 to-teal-500 "
+                >
+                  New Todo
+                </Button>
+              </div>
+            )}
+            <Home isSidebarOpen={isSidebarOpen} />
+          </>
         ) : option == 2 ? (
-          <AllToDos />
+          <>
+            {width <= 768 && (
+              <div className="flex justify-center pt-6 pb-2">
+                <Button
+                  color="success"
+                  endContent={<IoAddSharp />}
+                  className="text-1xl text-white bg-gradient-to-r from-indigo-500 to-teal-500 "
+                >
+                  New Todo
+                </Button>
+              </div>
+            )}
+            <AllToDos />
+          </>
         ) : (
-          <PriorityTasks />
+          <>
+            {width <= 768 && (
+              <div className="flex justify-center pt-6 pb-2">
+                <Button
+                  color="success"
+                  endContent={<IoAddSharp />}
+                  className="text-1xl text-white bg-gradient-to-r from-indigo-500 to-teal-500 "
+                >
+                  New Todo
+                </Button>
+              </div>
+            )}
+            <PriorityTasks />
+          </>
         )}
       </div>
     </div>
