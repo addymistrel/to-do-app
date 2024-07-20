@@ -145,7 +145,6 @@ export default function Auth({
                 email: signupData.email,
                 password: signupData.password,
                 todos: [],
-                id: generateUniqueId(),
               };
               fetch(`${process.env.BACKEND_URL}/data`, {
                 method: "PUT",
@@ -157,11 +156,11 @@ export default function Auth({
                 .then((res1) => {
                   res1.json();
                 })
-                .then(() => {
+                .then((userPost) => {
                   showToast("Sign Up Successfull!", "success");
                   dispatch({
                     type: "LOGIN_SUCCESS",
-                    payload: JSON.stringify(postData),
+                    payload: JSON.stringify(userPost),
                   });
                   navigate("/home");
                 })
