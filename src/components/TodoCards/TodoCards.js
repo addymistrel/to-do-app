@@ -194,7 +194,7 @@ export default function TodoCards({
                   isBordered
                   radius="full"
                   size="md"
-                  src="https://nextui.org/avatars/avatar-1.png"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeeqq5bu1g9ATW_JOPSWo2AbOV2j0OdVFG8A&s"
                 />
               </div>
               <div className="flex flex-col gap-1 items-start justify-center">
