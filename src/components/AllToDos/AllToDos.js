@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Tabs,
   Tab,
@@ -12,23 +12,75 @@ import {
 import { IoMdTime } from "react-icons/io";
 import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
 import "../Dashboard/Dashboard.css";
+import { useSelector } from "react-redux";
 
 export default function AllToDos() {
-  const arr = [1, 2, 3, 4, 4, 4, 4, 4, 4, 4, 4];
-  const [isFollowed, setIsFollowed] = useState(false);
+  const allData = useSelector((state) => JSON.parse(state.user.user)).todos;
+  const [arr, setArr] = useState(
+    allData.filter((item) => item.status === "completed")
+  );
+  const [selected, setSelected] = useState("completed");
+
+  useEffect(() => {
+    if (selected === "completed")
+      setArr(allData.filter((item) => item.status === "completed"));
+    if (selected === "pending")
+      setArr(allData.filter((item) => item.status === "pending"));
+  }, [selected]);
+
+  function formatDate(dateStr) {
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    function getOrdinalSuffix(day) {
+      if (day > 3 && day < 21) return "th";
+      switch (day % 10) {
+        case 1:
+          return "st";
+        case 2:
+          return "nd";
+        case 3:
+          return "rd";
+        default:
+          return "th";
+      }
+    }
+
+    const [dayStr, monthStr, yearStr] = dateStr.split("-");
+    const day = parseInt(dayStr, 10);
+    const month = parseInt(monthStr, 10) - 1;
+    const year = parseInt(yearStr, 10);
+
+    const suffix = getOrdinalSuffix(day);
+    return `${day}${suffix} ${months[month]}, ${year}`;
+  }
+
   return (
     <div className="flex flex-col">
       <div className="flex w-full justify-center items-center pt-6">
         <Tabs
           aria-label="Options"
           color="prim"
+          selectedKey={selected}
           classNames={{
             tabList: "bg-[#333]",
           }}
           variant="bordered"
+          onSelectionChange={setSelected}
         >
           <Tab
-            key="done"
+            key="completed"
             title={
               <div className="flex items-center space-x-2">
                 <IoCheckmarkDoneCircleSharp
@@ -65,43 +117,63 @@ export default function AllToDos() {
                   </div>
                   <div className="flex flex-col gap-1 items-start justify-center">
                     <h4 className="text-1xl font-semibold leading-none text-default-600">
-                      20th September, 2024
+                      {formatDate(item.date)}
                     </h4>
                   </div>
-                  <Button
-                    color="primary"
-                    radius="full"
-                    size="sm"
-                    variant={isFollowed ? "bordered" : "solid"}
-                    onPress={() => setIsFollowed(!isFollowed)}
-                  >
-                    Mark as Done
-                  </Button>
+                  {selected === "completed" ? (
+                    <Button
+                      color="success"
+                      radius="full"
+                      size="sm"
+                      variant="solid"
+                    >
+                      Completed
+                    </Button>
+                  ) : (
+                    <Button
+                      color="primary"
+                      radius="full"
+                      size="sm"
+                      variant="solid"
+                    >
+                      Mark as Done
+                    </Button>
+                  )}
                 </CardHeader>
                 <CardBody className="px-3 py-0 text-small text-default-400">
                   <div className="flex flex-col gap-1 items-start justify-center">
                     <h4 className="text-small font-semibold leading-none text-default-600">
-                      Zoey Lang
+                      {item.description}
                     </h4>
                   </div>
                   <span className="pt-2"></span>
                 </CardBody>
                 <CardFooter className="flex justify-end gap-3">
-                  <Button
-                    color="secondary"
-                    radius="full"
-                    size="sm"
-                    variant={isFollowed ? "bordered" : "solid"}
-                    onPress={() => setIsFollowed(!isFollowed)}
-                  >
-                    Edit
-                  </Button>
+                  {/* {item.isPrioritized === true && (
+                    <Button
+                      color="warning"
+                      radius="full"
+                      size="sm"
+                      variant="solid"
+                    >
+                      Prioritize
+                    </Button>
+                  )} */}
+                  {selected === "pending" && (
+                    <Button
+                      color="secondary"
+                      radius="full"
+                      size="sm"
+                      variant="solid"
+                    >
+                      Edit
+                    </Button>
+                  )}
                   <Button
                     color="danger"
                     radius="full"
                     size="sm"
-                    variant={isFollowed ? "bordered" : "solid"}
-                    onPress={() => setIsFollowed(!isFollowed)}
+                    variant="solid"
                   >
                     Delete
                   </Button>

@@ -7,18 +7,55 @@ import {
   Avatar,
   Button,
 } from "@nextui-org/react";
-import useWindowWidth from "../../Hooks/useWindowWidth/useWindowWidth";
+import { useSelector } from "react-redux";
 
-export default function TodoCards() {
-  const width = useWindowWidth();
-  const [arr, setArr] = useState([1, 2]);
-  const [isFollowed, setIsFollowed] = React.useState(false);
+export default function TodoCards({ currentPage, pageSize, todoData, status }) {
+  const paginate = (arr, pageNumber, pageSize) => {
+    const startIndex = (pageNumber - 1) * pageSize;
+    return arr.slice(startIndex, startIndex + pageSize);
+  };
 
-  useEffect(() => {
-    if (width > 1000) setArr([1, 2]);
-    else setArr([1]);
-  }, [width]);
-  return arr.map((item) => {
+  const currentData = paginate(todoData, currentPage, pageSize);
+
+  function formatDate(dateStr) {
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    function getOrdinalSuffix(day) {
+      if (day > 3 && day < 21) return "th";
+      switch (day % 10) {
+        case 1:
+          return "st";
+        case 2:
+          return "nd";
+        case 3:
+          return "rd";
+        default:
+          return "th";
+      }
+    }
+
+    const [dayStr, monthStr, yearStr] = dateStr.split("-");
+    const day = parseInt(dayStr, 10);
+    const month = parseInt(monthStr, 10) - 1;
+    const year = parseInt(yearStr, 10);
+
+    const suffix = getOrdinalSuffix(day);
+    return `${day}${suffix} ${months[month]}, ${year}`;
+  }
+
+  return currentData.map((item) => {
     return (
       <Card className="w-[340px]">
         <CardHeader className="justify-between">
@@ -32,44 +69,39 @@ export default function TodoCards() {
           </div>
           <div className="flex flex-col gap-1 items-start justify-center">
             <h4 className="text-1xl font-semibold leading-none text-default-600">
-              20th September, 2024
+              {formatDate(item.date)}
             </h4>
           </div>
-          <Button
-            color="primary"
-            radius="full"
-            size="sm"
-            variant={isFollowed ? "bordered" : "solid"}
-            onPress={() => setIsFollowed(!isFollowed)}
-          >
-            Mark as Done
-          </Button>
+          {status === "pending" ? (
+            <Button color="primary" radius="full" size="sm" variant="solid">
+              Mark as Done
+            </Button>
+          ) : (
+            <Button color="success" radius="full" size="sm" variant="solid">
+              Completed
+            </Button>
+          )}
         </CardHeader>
         <CardBody className="px-3 py-0 text-small text-default-400">
           <div className="flex flex-col gap-1 items-start justify-center">
             <h4 className="text-small font-semibold leading-none text-default-600">
-              Zoey Lang
+              {item.description}
             </h4>
           </div>
           <span className="pt-2"></span>
         </CardBody>
         <CardFooter className="flex justify-end gap-3">
-          <Button
-            color="secondary"
-            radius="full"
-            size="sm"
-            variant={isFollowed ? "bordered" : "solid"}
-            onPress={() => setIsFollowed(!isFollowed)}
-          >
-            Edit
-          </Button>
-          <Button
-            color="danger"
-            radius="full"
-            size="sm"
-            variant={isFollowed ? "bordered" : "solid"}
-            onPress={() => setIsFollowed(!isFollowed)}
-          >
+          {/* {item.isPrioritized === true && (
+            <Button color="warning" radius="full" size="sm" variant="solid">
+              Prioritize
+            </Button>
+          )} */}
+          {status === "pending" && (
+            <Button color="secondary" radius="full" size="sm" variant="solid">
+              Edit
+            </Button>
+          )}
+          <Button color="danger" radius="full" size="sm" variant="solid">
             Delete
           </Button>
         </CardFooter>
