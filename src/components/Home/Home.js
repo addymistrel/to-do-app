@@ -6,7 +6,7 @@ import { today, getLocalTimeZone } from "@internationalized/date";
 import useWindowWidth from "../../Hooks/useWindowWidth/useWindowWidth";
 import { useSelector } from "react-redux";
 
-function Home({ isSidebarOpen }) {
+function Home({ isSidebarOpen, refresh, setRefresh }) {
   const width = useWindowWidth();
   const allData = useSelector((state) => JSON.parse(state.user.user)).todos;
   const [date, setDate] = useState(today(getLocalTimeZone()));
@@ -43,7 +43,7 @@ function Home({ isSidebarOpen }) {
       setTotalPage_pending(Math.ceil(todoData_pending.length / 1));
       setPageSize_pending(1);
     }
-  }, [width, isSidebarOpen]);
+  }, [width, isSidebarOpen, allData.length]);
 
   //For Completed Section
   const todoData_completed = allData.filter(
@@ -81,7 +81,7 @@ function Home({ isSidebarOpen }) {
       setTotalPage_completed(Math.ceil(todoData_completed.length / 1));
       setPageSize_completed(1);
     }
-  }, [width, isSidebarOpen]);
+  }, [width, isSidebarOpen, refresh]);
 
   console.log("Hi", isSidebarOpen);
 
@@ -93,7 +93,6 @@ function Home({ isSidebarOpen }) {
     setCurrentPage_completed(page);
   };
 
-  console.log(date);
   return (
     <div className="main-work">
       <h1 class="text-3xl font-normal font-semibold leading-normal mt-0 mb-2 text-[#EF0031]">
@@ -109,6 +108,8 @@ function Home({ isSidebarOpen }) {
             <TodoCards
               currentPage={currentPage_pending}
               pageSize={pageSize_pending}
+              refresh={refresh}
+              setRefresh={setRefresh}
               todoData={todoData_pending}
               status={"pending"}
             />
