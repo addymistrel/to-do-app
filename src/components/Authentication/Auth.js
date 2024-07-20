@@ -131,7 +131,7 @@ export default function Auth({
       if (!validateEmail(signupData.email)) {
         showToast("Invalid Email!", "warning");
       } else {
-        fetch(`${process.env.REACT_APP_BACKEND_URL}/data/`, {
+        fetch("http://localhost:8080/data/", {
           method: "GET",
         })
           .then((res) => res.json())
@@ -146,8 +146,8 @@ export default function Auth({
                 password: signupData.password,
                 todos: [],
               };
-              fetch(`${process.env.BACKEND_URL}/data`, {
-                method: "PUT",
+              fetch(`${process.env.REACT_APP_BACKEND_URL}/data`, {
+                method: "POST",
                 headers: {
                   "Content-Type": "application/json",
                 },
@@ -156,17 +156,30 @@ export default function Auth({
                 .then((res1) => {
                   res1.json();
                 })
-                .then((userPost) => {
-                  showToast("Sign Up Successfull!", "success");
-                  dispatch({
-                    type: "LOGIN_SUCCESS",
-                    payload: JSON.stringify(userPost),
-                  });
-                  navigate("/home");
+                .then(() => {
+                  fetch(`${process.env.REACT_APP_BACKEND_URL}/data`, {
+                    method: "GET",
+                  })
+                    .then((res2) => res2.json())
+                    .then((data) => {
+                      const userdd = data.find(
+                        (item) => item.email === postData.email
+                      );
+                      if (userdd) {
+                        dispatch({
+                          type: "LOGIN_SUCCESS",
+                          payload: JSON.stringify(userdd),
+                        });
+                        showToast("Sign Up Successfull!", "success");
+                        navigate("/home");
+                      }
+                    })
+                    .catch((err) => console.log(err));
                 })
                 .catch((err) => console.log(err));
             }
-          });
+          })
+          .catch((err) => console.log(err));
       }
     }
   };
