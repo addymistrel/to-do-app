@@ -125,7 +125,7 @@ export default function AllToDos({ refresh, setRefresh }) {
     if (isBlank(editData)) {
       showToast("All Fields are Mandatory", "warning");
     } else {
-      await fetch(`http://localhost:8080/data/${userData.id}`, {
+      await fetch(`${process.env.REACT_APP_BACKEND_URL}/data/${userData.id}`, {
         method: "GET",
       })
         .then((res) => res.json())
@@ -135,13 +135,16 @@ export default function AllToDos({ refresh, setRefresh }) {
               ? deleteTaskById(data.todos, editData.id)
               : updateTaskById(data.todos, editData.id, editData);
           console.log(data);
-          return fetch(`http://localhost:8080/data/${userData.id}`, {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-          });
+          return fetch(
+            `${process.env.REACT_APP_BACKEND_URL}/data/${userData.id}`,
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(data),
+            }
+          );
         })
         .then((response) => response.json())
         .then((updatedUser) => {
@@ -167,20 +170,23 @@ export default function AllToDos({ refresh, setRefresh }) {
 
   async function handleDone(item) {
     item.status = "completed";
-    await fetch(`http://localhost:8080/data/${userData.id}`, {
+    await fetch(`${process.env.REACT_APP_BACKEND_URL}/data/${userData.id}`, {
       method: "GET",
     })
       .then((res) => res.json())
       .then((data) => {
         data.todos = updateTaskById(data.todos, item.id, item);
         console.log(data);
-        return fetch(`http://localhost:8080/data/${userData.id}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        });
+        return fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/data/${userData.id}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          }
+        );
       })
       .then((response) => response.json())
       .then((updatedUser) => {

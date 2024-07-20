@@ -129,19 +129,22 @@ function Dashboard() {
     if (isBlank(taskData)) {
       showToast("All Fields are mandatory", "warning");
     } else {
-      await fetch(`http://localhost:8080/data/${userData.id}`, {
+      await fetch(`${process.env.REACT_APP_BACKEND_URL}/data/${userData.id}`, {
         method: "GET",
       })
         .then((res) => res.json())
         .then((data) => {
           data.todos.push(taskData);
-          return fetch(`http://localhost:8080/data/${userData.id}`, {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-          });
+          return fetch(
+            `${process.env.REACT_APP_BACKEND_URL}/data/${userData.id}`,
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(data),
+            }
+          );
         })
         .then((response) => response.json())
         .then((updatedUser) => {
