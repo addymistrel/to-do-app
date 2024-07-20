@@ -70,7 +70,7 @@ export default function Auth({
   const showToast = (msg, vnt) => {
     enqueueSnackbar(msg, {
       variant: vnt,
-      autoHideDuration: 5000,
+      autoHideDuration: 3000,
       anchorOrigin: {
         vertical: "top",
         horizontal: "right",
