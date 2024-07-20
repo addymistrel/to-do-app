@@ -253,7 +253,15 @@
       "name": "Aditya Kumar Dutta",
       "email": "addymistrel@gmail.com",
       "password": "123456",
-      "todos": [],
+      "todos": [
+        {
+          "date": "20-07-2024",
+          "description": "Hello",
+          "status": "pending",
+          "isPrioritized": true,
+          "id": "lyu9abtmiiheeuv7t"
+        }
+      ],
       "id": 5
     }
   ]
