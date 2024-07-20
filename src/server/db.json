@@ -264,12 +264,5 @@
       ],
       "id": 5
     },
-    {
-      "name": "Tanisha",
-      "email": "tanisha@gmail.com",
-      "password": "123456",
-      "todos": [],
-      "id": 6
-    }
   ]
 }
