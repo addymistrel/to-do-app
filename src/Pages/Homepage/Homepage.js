@@ -10,18 +10,18 @@ import {
   Image,
 } from "@nextui-org/react";
 import { useState } from "react";
-import {useSelector} from "react-redux";
-import {Navigate} from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 import Auth from "../../components/Authentication/Auth";
 
 function Homepage() {
-  const isAuthenticated = useSelector(state=>state.user.isAuthenticated);
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const [signInopen, setSigninOpen] = useState(false);
   const [signupOpen, setSignupOpen] = useState(false);
 
-  if(isAuthenticated){
-    return <Navigate to={"/home"}/>
-      }
+  if (isAuthenticated) {
+    return <Navigate to={"/home"} />;
+  }
   return (
     <>
       <div>
